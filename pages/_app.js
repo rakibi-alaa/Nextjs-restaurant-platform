@@ -4,6 +4,10 @@ import App from 'next/app';
 import withRedux from 'next-redux-wrapper';
 import initStore from '../store/initStore';
 
+/*
+* CSS styles init
+* */
+import '../styles/index.css';
 
 class MyApp extends App {
 

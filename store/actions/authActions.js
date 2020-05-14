@@ -1,9 +1,12 @@
 import * as ActionTypes from './types';
 
-export const placeCredentials = () => {
+export const placeCredentials = (data) => {
     return {
         type: ActionTypes.PLACE_CREDENTIALS,
-        data: null
+        user: data.user,
+        token: data.token,
+        refreshToken: data.refreshToken,
+        roles: data.role,
     };
 }
 

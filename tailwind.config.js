@@ -1,7 +1,11 @@
 module.exports = {
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        indigo: '#9c92ac',
+      },
+    },
   },
   variants: {},
   plugins: [],

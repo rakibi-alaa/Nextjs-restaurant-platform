@@ -7,13 +7,15 @@ class Home extends React.Component{
     render() {
         return (
             <Layout title="Welcome">
-                <div className="p-4 shadow rounded bg-white">
-                    <h1 className="text-purple-500 leading-normal">Next.js</h1>
-                    <p className="text-gray-500">with Tailwind CSS</p>
+
+                <div className="flex mb-8 p-4 bg-white shadow rounded">
+                    <div className="w-1/2">
+                        <h1 className="text-5xl">Our burgers are the best in town</h1>
+                        <p> Our restaurant vhkc vksjvd vdjvbdv vkjd dvv dvkjvbjdv bvjsvbv jsdvbjkvbd vbsjdk vdbjkv jbvjksdv vkvbjdv sdjbv kjdbvjkbdsvdvkjbvj vjb</p>
+                    </div>
+                    <img src="burger_undraw.svg" width={700} />
                 </div>
-                <p>
-                    lorendc cdjcbc cjwbc jwbc jebcjec kcw
-                </p>
+
             </Layout>
         )
     }

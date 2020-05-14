@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from "./header";
 //import * as actions from '../store/actions';
 
-const Layout = ({ children, title, logout }) => (
+const Layout = ({ children, title, logout,user }) => (
     <div>
         <Head>
             <title>{ title }</title>
@@ -12,9 +12,9 @@ const Layout = ({ children, title, logout }) => (
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
-        <Header logout={logout}/>
+        <Header logout={logout} user={user} />
 
-        <div className="p-4 m-10 shadow  bg-white ">
+        <div className="p-4 m-10   ">
             { children }
         </div>
     </div>

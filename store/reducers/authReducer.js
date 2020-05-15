@@ -11,6 +11,7 @@ const initialState = {
 }
 
 const placeCredentials = (state, action) => {
+    console.log('here 3333')
     return {
         ...state,
         user : action.user,

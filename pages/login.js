@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Formik  } from 'formik';
 import Layout from '../components/layout'
+import * as actions from '../store/actions';
 
 class Login extends React.Component{
 
@@ -12,8 +13,25 @@ class Login extends React.Component{
         }
     }
     onSubmit(values){
-        alert(JSON.stringify(values))
+        fetch(process.env.API_URL+ '/auth/login',{
+            method : 'POST',
+            body : JSON.stringify(values),
+            headers :{
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            }
+        }).then(res => res.json()).then(res =>{
+            res.token ? this.props.placeCredentials(res) : null;
+            console.log(res.token);
+        }).catch(error =>{
+            console.log(error)
+        })
     }
+    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
+        console.log('*************************** user')
+        console.log(this.props.user)
+    }
+
     render() {
         return (
             <Layout title="Login">
@@ -35,13 +53,11 @@ class Login extends React.Component{
                             return errors;
                         }}
                         onSubmit={(values, { setSubmitting }) => {
-
-                                this.onSubmit(values)
+                                this.onSubmit(values);
                                 setSubmitting(false);
-
                         }}
                     >
-                        {({ values,handleChange,handleSubmit,isSubmitting }) => (
+                        {({ values,errors,handleChange,handleSubmit,isSubmitting }) => (
                             <form className="bg-white w-1/4 border rounded px-8 pt-6 pb-8 mb-4 " onSubmit={handleSubmit}>
                                 <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
@@ -86,13 +102,14 @@ class Login extends React.Component{
 }
 const mapStateToProps = state => {
     return {
-        test : state.auth.test
+        test : state.auth.test,
+        user : state.auth.user
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        placeCredentials : (data) => dispatch(actions.placeCredentials(data))
     };
 }
 

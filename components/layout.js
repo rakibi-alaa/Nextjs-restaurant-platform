@@ -5,7 +5,7 @@ import Header from "./header";
 //import * as actions from '../store/actions';
 
 const Layout = ({ children, title, logout,user }) => (
-    <div>
+    <div className="min-h-screen">
         <Head>
             <title>{ title }</title>
             <meta charSet="utf-8" />
@@ -14,7 +14,7 @@ const Layout = ({ children, title, logout,user }) => (
 
         <Header logout={logout} user={user} />
 
-        <div className="p-4 m-10   ">
+        <div className="p-4 m-10 ">
             { children }
         </div>
     </div>

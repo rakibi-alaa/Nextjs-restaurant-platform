@@ -3,16 +3,18 @@ import React from 'react';
 import { Formik  } from 'formik';
 import Layout from '../components/layout'
 import * as actions from '../store/actions';
+import Link from "next/link";
 
 class Login extends React.Component{
 
     constructor(props){
         super(props);
         this.state = {
-
+            error : false
         }
     }
     onSubmit(values){
+        this.setState({error:false});
         fetch(process.env.API_URL+ '/auth/login',{
             method : 'POST',
             body : JSON.stringify(values),
@@ -21,15 +23,18 @@ class Login extends React.Component{
                 'Content-Type' : 'application/json'
             }
         }).then(res => res.json()).then(res =>{
-            res.token ? this.props.placeCredentials(res) : null;
-            console.log(res.token);
+            if(res.token){
+                this.props.placeCredentials(res);
+            }else if(res.authScheme){
+                this.setState({error:true});
+            }
         }).catch(error =>{
             console.log(error)
         })
     }
     UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
-        console.log('*************************** user')
-        console.log(this.props.user)
+
+        console.log(nextProps)
     }
 
     render() {
@@ -37,7 +42,7 @@ class Login extends React.Component{
             <Layout title="Login">
 
 
-                <div className="bg-white shadow my-auto  flex items-center justify-around p-8">
+                <div className="bg-white shadow my-auto  flex items-center rounded justify-around p-8">
 
                     <Formik
                         initialValues={{ email: '', password: '' }}
@@ -67,7 +72,7 @@ class Login extends React.Component{
                                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         id="username" type="email" name="email" placeholder="Username" onChange={handleChange} value={values.email} />
                                 </div>
-                                <div className="mb-6">
+                                <div className="">
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                                         Password
                                     </label>
@@ -75,23 +80,32 @@ class Login extends React.Component{
                                          className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                         id="password" type="password" name="password" placeholder="Password" onChange={handleChange} value={values.password}/>
                                 </div>
-                                <div className="flex items-center justify-between">
+                                {
+                                    this.state.error &&
+                                    <div className="bg-red-400 text-center py-1 ">
+                                        <span className=" mr-2 text-left text-sm flex-auto">email or password incorrect</span>
+                                    </div>
+                                }
+
+                                <div className="flex items-center justify-between mt-2">
                                     <button
-                                        className="bg-indigo hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        className="bg-indigo hover:bg-indigo_hovered text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                         type="submit" disabled={isSubmitting}>
                                         Sign In
                                     </button>
-                                    <a className="inline-block align-baseline font-bold text-sm text-indigo hover:text-blue-800"
-                                       href="#">
-                                        Create account
-                                    </a>
+                                    <Link href="/register">
+                                        <a className="inline-block align-baseline font-bold text-sm text-indigo hover:text-blue-800"
+                                           >
+                                            Create account
+                                        </a>
+                                    </Link>
                                 </div>
                             </form>
                         )}
                     </Formik>
 
                     <div >
-                        <img src="auth_undraw.svg" className="max-w-lg"  />
+                        <img src="auth_undraw.svg" className="max-w-2xl"  />
                     </div>
                 </div>
 

@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       colors: {
         indigo: '#9c92ac',
+        indigo_hovered: '#645a73',
       },
     },
   },

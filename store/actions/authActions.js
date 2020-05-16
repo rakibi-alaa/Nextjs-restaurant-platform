@@ -9,7 +9,18 @@ export const placeCredentials = (data) => {
         refreshToken: data.refreshToken,
         roles: data.role,
     };
-}
+};
+
+export const createAccount = (data) => {
+
+    return {
+        type: ActionTypes.CREATE_ACCOUNT,
+        user: data.user,
+        token: data.token,
+        refreshToken: data.refreshToken,
+        roles: data.role,
+    };
+};
 
 
 export const logOut = () => {

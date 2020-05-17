@@ -4,6 +4,8 @@ import { Formik  } from 'formik';
 import Layout from '../components/layout'
 import * as actions from '../store/actions';
 import Link from "next/link";
+import Router from "next/router";
+
 
 class Login extends React.Component{
 
@@ -25,6 +27,7 @@ class Login extends React.Component{
         }).then(res => res.json()).then(res =>{
             if(res.token){
                 this.props.placeCredentials(res);
+                Router.push('/')
             }else if(res.authScheme){
                 this.setState({error:true});
             }

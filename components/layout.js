@@ -1,10 +1,12 @@
-import Link from 'next/link';
+
 import Head from 'next/head';
 import { connect } from 'react-redux';
 import Header from "./header";
-//import * as actions from '../store/actions';
+import * as actions from '../store/actions';
 
-const Layout = ({ children, title, logout,user }) => (
+
+
+const Layout = ({ children, title,user,logOut}) => (
     <div className="min-h-screen">
         <Head>
             <title>{ title }</title>
@@ -12,7 +14,7 @@ const Layout = ({ children, title, logout,user }) => (
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
 
-        <Header logout={logout} user={user} />
+        <Header logOut={logOut} user={user} />
 
         <div className="p-4 m-10 ">
             { children }
@@ -20,14 +22,17 @@ const Layout = ({ children, title, logout,user }) => (
     </div>
 );
 
+
+
+
 const mapStateToProps = state => {
-    return {
-        user : state.auth.user
-    };
+    return {};
 };
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return {
+        logOut : () => dispatch(actions.logOut())
+    };
 };
 
 

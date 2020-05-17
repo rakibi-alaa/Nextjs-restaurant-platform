@@ -4,9 +4,14 @@ import React from 'react';
 import Layout from '../components/layout'
 
 class Home extends React.Component{
+
+    componentDidMount() {
+        console.log(this.props.user)
+    }
+
     render() {
         return (
-            <Layout title="Welcome">
+            <Layout title="Welcome" user={this.props.user}>
 
                 <div className="flex mb-8 p-4 bg-white shadow rounded">
                     <div className="w-1/2">
@@ -22,7 +27,7 @@ class Home extends React.Component{
 }
 const mapStateToProps = state => {
     return {
-        test : state.auth.test
+        user : state.auth.user
     }
 }
 

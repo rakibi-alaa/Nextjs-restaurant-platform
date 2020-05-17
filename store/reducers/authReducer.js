@@ -17,7 +17,7 @@ const placeCredentials = (state, action) => {
         user : action.user,
         jwtToken: action.token,
         refreshToken : action.refreshToken,
-        roles : action.role
+        roles : action.roles
     };
 };
 
@@ -28,7 +28,7 @@ const createAccount = (state, action) => {
         user : action.user,
         jwtToken: action.token,
         refreshToken : action.refreshToken,
-        roles : action.role
+        roles : action.roles
     };
 };
 

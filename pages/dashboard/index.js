@@ -1,15 +1,14 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
-import Layout from '../components/layout'
+import Layout from '../../components/layout'
 
-class Home extends React.Component{
+class Dashboard extends React.Component{
+
 
     componentDidMount() {
         console.log(this.props.user)
-        console.log('********************')
     }
-
 
     render() {
         return (
@@ -17,7 +16,7 @@ class Home extends React.Component{
 
                 <div className="flex mb-8 p-4 bg-white shadow rounded">
                     <div className="w-1/2">
-                        <h1 className="text-5xl">Our burgers are the best in town</h1>
+                        <h1 className="text-5xl">Admin Dashboard</h1>
                         <p> Our restaurant vhkc vksjvd vdjvbdv vkjd dvv dvkjvbjdv bvjsvbv jsdvbjkvbd vbsjdk vdbjkv jbvjksdv vkvbjdv sdjbv kjdbvjkbdsvdvkjbvj vjb</p>
                     </div>
                     <img src="burger_undraw.svg" width={700} />
@@ -40,4 +39,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

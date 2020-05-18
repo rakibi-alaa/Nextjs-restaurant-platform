@@ -9,7 +9,9 @@ class Home extends React.Component{
         console.log(this.props.user)
         console.log('********************')
     }
-
+    static async getInitialProps(ctx) {
+        console.log('********************')
+    }
 
     render() {
         return (

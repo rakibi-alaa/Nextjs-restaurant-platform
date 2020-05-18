@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import React from 'react';
-
+import withAuth from '../../utils/withAuth';
 import Layout from '../../components/layout'
 
 class Dashboard extends React.Component{
 
 
     componentDidMount() {
-        console.log(this.props.user)
+
     }
 
     render() {
@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth(Dashboard));

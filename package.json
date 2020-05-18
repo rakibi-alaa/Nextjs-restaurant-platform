@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "formik": "^2.1.4",
+    "js-cookie": "^2.2.1",
     "next": "9.4.0",
     "next-redux-wrapper": "^5.0.0",
     "react": "16.13.1",

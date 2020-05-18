@@ -12,11 +12,9 @@ class Dashboard extends React.Component{
 
     render() {
         return (
-            <DashboardLayout title="Welcome" >
+            <div>
 
-
-
-            </DashboardLayout>
+            </div>
         )
     }
 }

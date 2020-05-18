@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import Layout from '../components/layout'
+import * as actions from "../store/actions";
+import cookie from 'js-cookie'
 
 class Home extends React.Component{
 
@@ -9,6 +11,8 @@ class Home extends React.Component{
 
 
     }
+
+
 
     render() {
         return (
@@ -34,7 +38,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        placeCredentials : (data) => dispatch(actions.placeCredentials(data))
     };
 }
 

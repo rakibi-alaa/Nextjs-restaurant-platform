@@ -2,25 +2,27 @@ import * as actions from '../actions/types';
 
 import cookie from 'js-cookie'
 
+
 const initialState = {
-    test : 'test auth reducer',
-    user: null,
+    user:   null,
     jwtToken: null,
     refreshToken: null,
-    roles : []
+    roles :   []
 }
 
 const placeCredentials = (state, action) => {
-    console.log('here 3333');
-    console.log('here 33383');
-    cookie.set('auth_data',{
-        user : action.user,
-        jwtToken: action.token,
-        roles : action.roles
-    });
 
-    console.log(cookie.get('auth_data'))
-    console.log('cokier')
+
+        cookie.set('auth_data',JSON.stringify({
+            user : action.user,
+            jwtToken: action.token,
+            refreshToken : action.refreshToken,
+            roles : action.roles
+        }));
+
+
+
+
     return {
         ...state,
         user : action.user,
@@ -32,11 +34,12 @@ const placeCredentials = (state, action) => {
 
 const createAccount = (state, action) => {
 
-    cookie.set('auth_data',{
+    cookie.set('auth_data',JSON.stringify({
         user : action.user,
         jwtToken: action.token,
+        refreshToken : action.refreshToken,
         roles : action.roles
-    });
+    }));
     return {
         ...state,
         user : action.user,
@@ -62,6 +65,7 @@ const logOut = (state, action) => {
 
 
 const authReducer = (state = initialState, action) => {
+
 
     switch (action.type) {
         case actions.PLACE_CREDENTIALS :

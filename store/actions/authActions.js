@@ -1,7 +1,8 @@
 import * as ActionTypes from './types';
 
 export const placeCredentials = (data) => {
-
+        console.log('******************')
+        console.log(data)
     return {
         type: ActionTypes.PLACE_CREDENTIALS,
         user: data.user,

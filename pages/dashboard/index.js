@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import withAuth from '../../utils/withAuth';
-import Layout from '../../components/layout'
+import DashboardLayout from '../../components/dashboardLayout'
 
 class Dashboard extends React.Component{
 
@@ -12,17 +12,11 @@ class Dashboard extends React.Component{
 
     render() {
         return (
-            <Layout title="Welcome" >
+            <DashboardLayout title="Welcome" >
 
-                <div className="flex mb-8 p-4 bg-white shadow rounded">
-                    <div className="w-1/2">
-                        <h1 className="text-5xl">Admin Dashboard</h1>
-                        <p> Our restaurant vhkc vksjvd vdjvbdv vkjd dvv dvkjvbjdv bvjsvbv jsdvbjkvbd vbsjdk vdbjkv jbvjksdv vkvbjdv sdjbv kjdbvjkbdsvdvkjbvj vjb</p>
-                    </div>
-                    <img src="burger_undraw.svg" width={700} />
-                </div>
 
-            </Layout>
+
+            </DashboardLayout>
         )
     }
 }

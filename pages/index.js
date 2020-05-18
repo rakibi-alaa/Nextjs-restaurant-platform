@@ -6,11 +6,8 @@ import Layout from '../components/layout'
 class Home extends React.Component{
 
     componentDidMount() {
-        console.log(this.props.user)
-        console.log('********************')
-    }
-    static async getInitialProps(ctx) {
-        console.log('********************')
+
+
     }
 
     render() {

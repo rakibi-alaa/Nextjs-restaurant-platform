@@ -1,6 +1,6 @@
 import * as actions from '../actions/types';
 
-
+import cookie from 'js-cookie'
 
 const initialState = {
     test : 'test auth reducer',
@@ -11,7 +11,16 @@ const initialState = {
 }
 
 const placeCredentials = (state, action) => {
-    console.log('here 3333')
+    console.log('here 3333');
+    console.log('here 33383');
+    cookie.set('auth_data',{
+        user : action.user,
+        jwtToken: action.token,
+        roles : action.roles
+    });
+
+    console.log(cookie.get('auth_data'))
+    console.log('cokier')
     return {
         ...state,
         user : action.user,
@@ -22,7 +31,12 @@ const placeCredentials = (state, action) => {
 };
 
 const createAccount = (state, action) => {
-    console.log('here 4444');
+
+    cookie.set('auth_data',{
+        user : action.user,
+        jwtToken: action.token,
+        roles : action.roles
+    });
     return {
         ...state,
         user : action.user,
@@ -35,6 +49,7 @@ const createAccount = (state, action) => {
 
 
 const logOut = (state, action) => {
+    cookie.remove('auth_data');
     return {
         ...state,
         user: null,

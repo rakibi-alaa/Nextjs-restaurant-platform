@@ -35,10 +35,7 @@ class Login extends React.Component{
             console.log(error)
         })
     }
-    UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
 
-        console.log(nextProps)
-    }
 
     render() {
         return (

@@ -4,17 +4,21 @@ import { Provider } from 'react-redux';
 import App from 'next/app';
 import withRedux from 'next-redux-wrapper';
 import initStore from '../store/initStore';
-
+import AuthService from '../utils/authService';
 /*
 * CSS styles init
 * */
 import '../styles/index.css';
 
+const auth = new AuthService();
 class MyApp extends App {
 
     static async getInitialProps({ Component, ctx }) {
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
         return {pageProps: pageProps};
+    }
+    componentDidMount(){
+        auth.refillReduxAfterRefresh(this.props.store);
     }
 
     render() {

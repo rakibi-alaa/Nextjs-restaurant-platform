@@ -1,5 +1,5 @@
 import cookie from 'js-cookie';
-
+import {placeCredentials} from '../store/actions'
 export default class AuthService {
     constructor(domain) {
         /*this.domain = domain || 'http://localhost:5000';
@@ -14,7 +14,16 @@ export default class AuthService {
         return data
     }
 
+    refillReduxAfterRefresh(store){
+        if(!store.getState().auth.user){
+            if(this.getAuthData()){
+                let data = JSON.parse(this.getAuthData());
+                console.log(data)
+                store.dispatch(placeCredentials(data));
+            }
+        }
 
+    }
 
     setAuthData(auth){
         cookie.set('auth_data', auth)

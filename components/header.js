@@ -26,12 +26,14 @@ const Header = (props) => (
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                 <div className="text-sm lg:flex-grow">
                     {
-                        props.roles && props.roles.includes('admin') &&
+                        props.roles && props.roles.includes('admin') ?
                         <Link href="/dashboard">
                             <a className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4">
                                Admin dashboard
                             </a>
                         </Link>
+                            :
+                            null
 
                     }
 
@@ -70,7 +72,7 @@ const Header = (props) => (
     </header>
 );
 
-Header.getInitial
+
 
 
 

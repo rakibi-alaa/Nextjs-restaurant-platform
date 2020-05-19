@@ -8,7 +8,7 @@ export const placeCredentials = (data) => {
         user: data.user,
         token: data.token,
         refreshToken: data.refreshToken,
-        roles: data.role,
+        roles: data.roles,
     };
 };
 
@@ -19,7 +19,7 @@ export const createAccount = (data) => {
         user: data.user,
         token: data.token,
         refreshToken: data.refreshToken,
-        roles: data.role,
+        roles: data.roles,
     };
 };
 

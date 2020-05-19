@@ -7,12 +7,13 @@ import React from "react";
 
 
 
-const DashboardLayout = ({ children, title,user,logOut,roles}) => (
+const DashboardLayout = ({ children, title,secondTitle,user,logOut,roles}) => (
     <div className="min-h-screen">
         <Head>
             <title>{ title }</title>
             <meta charSet="utf-8" />
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css" />
         </Head>
         <div className="w-full  h-screen flex">
 
@@ -70,9 +71,9 @@ const DashboardLayout = ({ children, title,user,logOut,roles}) => (
                 </ul>
             </div>
             <div className="w-full h-screen bg-white p-4">
-                <h1 className="text-3xl">Welcome to your Dashboard {user ? user.username : ''}</h1>
-                <div className="w-full  bg-red-400 mt-8">
-                    vjnjvbdvb
+                <h1 className="text-3xl">{secondTitle}</h1>
+                <div className="w-full  mt-8">
+                    {children}
                 </div>
             </div>
 

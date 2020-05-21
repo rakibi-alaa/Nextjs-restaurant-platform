@@ -4,33 +4,42 @@ import withAuth from '../../../utils/withAuth';
 import DashboardLayout from '../../../components/dashboardLayout'
 import $ from 'jquery';
 import datatable from 'datatables.net';
+import AuthService from "../../../utils/authService";
 
 
 class DashboardOrders extends React.Component{
 
 
-    componentDidMount() {
-        $('#data_table').dataTable({
-            data: [
 
-            ],
+
+    async componentDidMount() {
+        let orders = [];
+
+        await fetch(process.env.API_URL_PREFIX_ADMIN + '/orders',{
+            headers :{
+                'Accept' : 'application/json',
+                'Authorization': 'Bearer ' + AuthService.token
+            }
+        }).then(res => res.json()).then(res =>{
+            orders = res.length > 0 ? res : [];
+        }).catch(error => console.log(error));
+
+        $('#data_table').dataTable({
+            data: orders,
             columns: [
-                { data: 'name' },
-                { data: 'position' },
-                { data: 'salary' },
-                { data: 'office' },
-                { data: 'extn' },
+                { data: 'customer_full_name'},
+                { data: 'customer_email'},
+                { data: 'customer_phone'},
+                { data: 'total'},
+                { data: 'status.status'},
             ]
         });
-
-
-
     }
 
     render() {
         return (
             <DashboardLayout  title="Orders" secondTitle="Orders">
-                <table id="data_table" className="display cell-border compact hover order-column row-border stripe" >
+                <table id="data_table" className="display cell-border hover order-column row-border stripe" >
                     <thead>
                     <tr>
                         <th>Customer name</th>
@@ -50,7 +59,8 @@ class DashboardOrders extends React.Component{
 }
 const mapStateToProps = state => {
     return {
-        user : state.auth.user
+        user : state.auth.user,
+        jwtToken : state.auth.jwtToken
     }
 }
 

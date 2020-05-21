@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import AuthService from './authService'
 import Router from 'next/router'
-import Login from '../pages/login'
 export default function withAuth(AuthComponent) {
-    const Auth = new AuthService()
+
     return class Authenticated extends Component {
         constructor(props) {
             super(props);
@@ -14,8 +13,9 @@ export default function withAuth(AuthComponent) {
 
 
 
-        componentDidMount () {
-            if (!Auth.loggedIn()) {
+        async componentDidMount () {
+            console.log(AuthService.loggedIn())
+            if (!AuthService.token) {
                 Router.push('/login')
             }
             this.setState({ isLoading: false });
@@ -29,7 +29,7 @@ export default function withAuth(AuthComponent) {
                     </div>
                 )
             }else{
-                return <AuthComponent {...this.props}  auth={Auth} />
+                return <AuthComponent {...this.props}  auth={AuthService} />
             }
 
         }

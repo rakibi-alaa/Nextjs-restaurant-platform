@@ -1,69 +1,38 @@
 import cookie from 'js-cookie';
 import {placeCredentials} from '../store/actions'
+
+
 export default class AuthService {
-    constructor(domain) {
-        /*this.domain = domain || 'http://localhost:5000';
-        this.fetch = this.fetch.bind(this);
-        this.getProfile = this.getProfile.bind(this)*/
+
+
+    static loggedIn(){
+        return localStorage.getItem('token');
+    }
+    static setToken(token){
+        localStorage.setItem('token',token)
+        return token;
     }
 
-
-
-    loggedIn(){
-        const data = this.getAuthData();
-        return data
-    }
-
-    refillReduxAfterRefresh(store){
+    static async refillReduxAfterRefresh(store){
         if(!store.getState().auth.user){
-            if(this.getAuthData()){
-                let data = JSON.parse(this.getAuthData());
-                console.log(data)
-                store.dispatch(placeCredentials(data));
-            }
-        }
+            await fetch(process.env.API_URL+'/auth/refresh',{
+                method : 'POST',
+                headers:{
+                    'Accept' : 'application/json'
+                },
+                credentials : 'include'
+            }).then(res => res.json()).then(res =>{
 
-    }
+                console.log(res);
+                if(res.user){
+                    this.setToken(res.token);
+                    store.dispatch(placeCredentials(res));
+                }
 
-    setAuthData(auth){
-        cookie.set('auth_data', auth)
-    }
-
-    getAuthData(){
-        return cookie.get('auth_data')
-    }
-
-    clearAuthData(){
-        cookie.remove('auth_data');
-    }
-
-    _checkStatus(response) {
-        // raises an error in case response status is not a success
-        if (response.status >= 200 && response.status < 300) {
-            return response
-        } else {
-            var error = new Error(response.statusText)
-            error.response = response
-            throw error
+            })
         }
     }
 
-    fetch(url, options){
-        // performs api calls sending the required authentication headers
-        const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
 
-        if (this.loggedIn()){
-            headers['Authorization'] = 'Bearer ' + this.getToken()
-        }
 
-        return fetch(url, {
-            headers,
-            ...options
-        })
-            .then(this._checkStatus)
-            .then(response => response.json())
-    }
 }

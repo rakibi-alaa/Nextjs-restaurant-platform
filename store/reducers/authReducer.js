@@ -13,16 +13,6 @@ const initialState = {
 const placeCredentials = (state, action) => {
 
 
-        cookie.set('auth_data',JSON.stringify({
-            user : action.user,
-            jwtToken: action.token,
-            refreshToken : action.refreshToken,
-            roles : action.roles
-        }));
-
-
-
-
     return {
         ...state,
         user : action.user,
@@ -34,12 +24,7 @@ const placeCredentials = (state, action) => {
 
 const createAccount = (state, action) => {
 
-    cookie.set('auth_data',JSON.stringify({
-        user : action.user,
-        jwtToken: action.token,
-        refreshToken : action.refreshToken,
-        roles : action.roles
-    }));
+
     return {
         ...state,
         user : action.user,
@@ -52,7 +37,7 @@ const createAccount = (state, action) => {
 
 
 const logOut = (state, action) => {
-    cookie.remove('auth_data');
+
     return {
         ...state,
         user: null,

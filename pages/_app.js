@@ -10,15 +10,15 @@ import AuthService from '../utils/authService';
 * */
 import '../styles/index.css';
 
-const auth = new AuthService();
+
 class MyApp extends App {
 
     static async getInitialProps({ Component, ctx }) {
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
         return {pageProps: pageProps};
     }
-    componentDidMount(){
-        auth.refillReduxAfterRefresh(this.props.store);
+    async componentDidMount(){
+        await AuthService.refillReduxAfterRefresh(this.props.store);
     }
 
     render() {

@@ -5,7 +5,7 @@ import Layout from '../components/layout'
 import * as actions from '../store/actions';
 import Link from "next/link";
 import Router from "next/router";
-
+import AuthService from '../utils/authService'
 
 class Login extends React.Component{
 
@@ -20,12 +20,18 @@ class Login extends React.Component{
         fetch(process.env.API_URL+ '/auth/login',{
             method : 'POST',
             body : JSON.stringify(values),
+            credentials: 'include',
             headers :{
                 'Accept' : 'application/json',
                 'Content-Type' : 'application/json'
             }
-        }).then(res => res.json()).then(res =>{
+        }).then(res => {
+            console.log(res)
+            return res.json()
+        }).then(res =>{
             if(res.token){
+                console.log('jjjjjj')
+                AuthService.setToken(res.token);
                 this.props.placeCredentials(res);
                 Router.push('/')
             }else if(res.authScheme){

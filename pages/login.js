@@ -17,7 +17,7 @@ class Login extends React.Component{
     }
     onSubmit(values){
         this.setState({error:false});
-        fetch(process.env.API_URL+ '/auth/login',{
+        fetch(process.env.LOCAL_API_URL+ '/api/login',{
             method : 'POST',
             body : JSON.stringify(values),
             credentials: 'include',
@@ -30,7 +30,6 @@ class Login extends React.Component{
             return res.json()
         }).then(res =>{
             if(res.token){
-                console.log('jjjjjj')
                 AuthService.setToken(res.token);
                 this.props.placeCredentials(res);
                 Router.push('/')

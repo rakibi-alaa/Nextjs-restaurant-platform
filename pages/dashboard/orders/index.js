@@ -18,7 +18,7 @@ class DashboardOrders extends React.Component{
         await fetch(process.env.API_URL_PREFIX_ADMIN + '/orders',{
             headers :{
                 'Accept' : 'application/json',
-                'Authorization': 'Bearer ' + AuthService.token
+                'Authorization': 'Bearer ' + local
             }
         }).then(res => res.json()).then(res =>{
             orders = res.length > 0 ? res : [];

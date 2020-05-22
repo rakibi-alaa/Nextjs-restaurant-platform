@@ -11,27 +11,16 @@ export default function withAuth(AuthComponent) {
             };
         }
 
+        static async getInitialProps(ctx) {
 
-
-        async componentDidMount () {
-            console.log(AuthService.loggedIn())
-            if (!AuthService.token) {
-                Router.push('/login')
-            }
-            this.setState({ isLoading: false });
+            await AuthService.checkToken(ctx);
+            return {}
         }
 
-        render() {
-            if(this.state.isLoading){
-                return (
-                    <div className="bg-red-500">
-                        <h1>Loading....</h1>
-                    </div>
-                )
-            }else{
-                return <AuthComponent {...this.props}  auth={AuthService} />
-            }
 
+
+        render() {
+            return <AuthComponent {...this.props}  auth={AuthService} />
         }
     }
 }

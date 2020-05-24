@@ -26,11 +26,10 @@ class Login extends React.Component{
                 'Content-Type' : 'application/json'
             }
         }).then(res => {
-            console.log(res)
             return res.json()
         }).then(res =>{
             if(res.token){
-                AuthService.setToken(res.token);
+                AuthService.setToken(res.token,res.cookieMaxAge);
                 this.props.placeCredentials(res);
                 Router.push('/')
             }else if(res.authScheme){

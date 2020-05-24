@@ -15,9 +15,10 @@ export default async function login(req, res) {
             }
         });
 
-        console.log(resp.status)
+        console.log(resp.status,resp.statusText)
         if(resp.status === 200){
             const data = await resp.json();
+
             if(data.token){
                 res.setHeader('Set-Cookie', cookie.serialize('auth', data.token, {
                     httpOnly: true,
@@ -26,15 +27,9 @@ export default async function login(req, res) {
                     path: '/'
                 }))
             }
-            res.status(200).json(data);
+
+            res.status(200).json({...data,cookieMaxAge : Math.floor(((new Date()).getTime() / 1000)+3600)});
         }
-        res.setHeader('Set-Cookie', cookie.serialize('auth', jwt, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV !== 'development',
-            sameSite: 'strict',
-            maxAge: 3600,
-            path: '/'
-        }))
 
 
     } else {

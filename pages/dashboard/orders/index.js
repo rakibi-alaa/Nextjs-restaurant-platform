@@ -1,31 +1,23 @@
-import { connect } from 'react-redux';
 import React from 'react';
 import withAuth from '../../../utils/withAuth';
 import DashboardLayout from '../../../components/dashboardLayout'
 import $ from 'jquery';
 import datatable from 'datatables.net';
 import AuthService from "../../../utils/authService";
+import Link from "next/link";
 
 
 class DashboardOrders extends React.Component{
 
 
+    static async getInitialProps(ctx) {
+        const resp = await AuthService.fetchWithAuth(ctx,process.env.API_URL_PREFIX_ADMIN + '/orders','GET');
+        return {orders : resp};
+    }
 
-
-    async componentDidMount() {
-        let orders = [];
-
-        await fetch(process.env.API_URL_PREFIX_ADMIN + '/orders',{
-            headers :{
-                'Accept' : 'application/json',
-                'Authorization': 'Bearer ' + local
-            }
-        }).then(res => res.json()).then(res =>{
-            orders = res.length > 0 ? res : [];
-        }).catch(error => console.log(error));
-
+    componentDidMount() {
         $('#data_table').dataTable({
-            data: orders,
+            data: this.props.orders ? this.props.orders : [],
             columns: [
                 { data: 'customer_full_name'},
                 { data: 'customer_email'},
@@ -39,6 +31,11 @@ class DashboardOrders extends React.Component{
     render() {
         return (
             <DashboardLayout  title="Orders" secondTitle="Orders">
+                <div className="w-full h-12 bg-red-300 text-right">
+                    <Link href="login">
+                        <a>Add</a>
+                    </Link>
+                </div>
                 <table id="data_table" className="display cell-border hover order-column row-border stripe" >
                     <thead>
                     <tr>
@@ -57,18 +54,7 @@ class DashboardOrders extends React.Component{
         )
     }
 }
-const mapStateToProps = state => {
-    return {
-        user : state.auth.user,
-        jwtToken : state.auth.jwtToken
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-
-    };
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAuth(DashboardOrders));
+
+export default withAuth(DashboardOrders);

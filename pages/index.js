@@ -3,16 +3,8 @@ import React from 'react';
 
 import Layout from '../components/layout'
 import * as actions from "../store/actions";
-import cookie from 'js-cookie'
 
 class Home extends React.Component{
-
-    componentDidMount() {
-
-
-    }
-
-
 
     render() {
         return (

@@ -29,7 +29,6 @@ export default class AuthService {
                 }});
             if(resp.status === 401){
                 store.dispatch(logOut());
-                Router.replace('/login');
             }else if(resp.status === 200){
                 const data = await resp.json();
                 store.dispatch(placeCredentials(data));
